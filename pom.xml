@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>basepom-minimal</artifactId>
+        <groupId>org.basepom</groupId>
+        <version>44</version>
+    </parent>
+
+    <groupId>test</groupId>
+    <artifactId>test-parent</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <basepom.check.skip-all>true</basepom.check.skip-all>
+        <basepom.check.skip-dependency>false</basepom.check.skip-dependency>
+    </properties>
+
+    <modules>
+        <module>lib</module>
+        <module>dependency</module>
+        <module>service</module>
+        <module>dependency-shaded</module>
+        <module>service-shaded</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>test</groupId>
+                <artifactId>dependency</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>test</groupId>
+                <artifactId>dependency-shaded</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>old-dep</id>
+
+            <properties>
+                <dep.plugin.dependency.version>3.1.2</dep.plugin.dependency.version>
+                <dep.dependency-analyzer.version>1.11.1</dep.dependency-analyzer.version>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
